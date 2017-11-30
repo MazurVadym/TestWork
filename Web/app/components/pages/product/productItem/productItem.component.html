@@ -1,0 +1,12 @@
+<div class="card" style="width: 20rem;" *ngIf="product">
+    <img class="card-img-top" style="max-height: 200px;" [src]="selectedVariant.ImgUrl.length>0?selectedVariant.ImgUrl:product.ImgUrl">
+    <div class="card-block">
+        <h4 class="card-title">{{product.Title}}</h4>
+        <h4 class="card-title">{{selectedVariant.Title}}</h4>
+        <select id={{product.Id}} class="form-control select2" required name="variantSelect">
+        </select>
+        <button (click)="modal.show(product,selectedVariant)" class="btn btn-primary">add to product list</button>
+    </div>
+
+    <product-modal #productModal [productLists]="productLists"></product-modal>
+</div>

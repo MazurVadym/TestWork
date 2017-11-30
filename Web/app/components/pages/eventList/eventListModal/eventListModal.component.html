@@ -1,0 +1,35 @@
+<div bsModal class="modal fade location-modal" id="myModal" #eventListModal="bs-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header header">
+                <!--<h4 class="modal-title"> {{ isEditModal ? 'Edit Location' : 'Create Location' }}</h4>-->
+                <h4 class="modal-title">Event List</h4>
+            </div>
+            <button (click)="hide()" type="button"
+                    class="close pull-right btn btn-round btn-white modal-close-btn" data-dismiss="modal"
+                    aria-label="Close"><i class="material-icons modal-close-icon">x</i></button>
+            <div class="modal-body">
+                <div class="row">
+                    <form #eventListModal="ngForm" novalidate
+                          (ngSubmit)="save(eventListModal.valid);" class="form-horizontal">
+                        <input type="text" placeholder="Event List Title" name="Title" [(ngModel)]="eventList.Title">
+                        <input type="text" placeholder="Description" name="Description" [(ngModel)]="eventList.Description">
+
+                        <select id="customerSelect" class="form-control select2"
+                                required
+                                name="customerSelect">
+                        </select>
+
+                        <select id="productListSelect" class="form-control select2" multiple="multiple"
+                                required
+                                name="productListSelect">
+                        </select>
+
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

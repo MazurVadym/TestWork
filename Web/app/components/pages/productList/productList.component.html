@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-4">
+        <button class="btn btn-primary" (click)="modal.show()">Create List</button>
+    </div>
+    <div class="col-8">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let productList of productLists">
+                <div>{{productList.Title}}</div>
+                <div>{{productList.OwnerFullName}}</div>
+                <button (click)="modal.show(productList,false)">edit</button>
+                <button (click)="delete(productList)">delete</button>
+                <div *ngFor="let productItem of productList.ProductItem">
+                    <product-list-item [productItem]="productItem"></product-list-item>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<product-list-modal #productListModal (productListChange)="updateProductLists($event)"></product-list-modal>

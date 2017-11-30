@@ -1,0 +1,14 @@
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a [routerLink]="['/eventList']" routerLinkActive="active" class="nav-link active">Event List</a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/productList']" class="nav-link" routerLinkActive="active" href="#">Product List</a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/product']" class="nav-link" routerLinkActive="active" href="#">Products</a>
+        </li>
+    </ul>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,28 @@
+<div bsModal class="modal fade location-modal" id="myModal" #productModal="bs-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header header">
+                <!--<h4 class="modal-title"> {{ isEditModal ? 'Edit Location' : 'Create Location' }}</h4>-->
+                <h4 class="modal-title">Add to list</h4>
+            </div>
+            <button (click)="hide()" type="button"
+                    class="close pull-right btn btn-round btn-white modal-close-btn" data-dismiss="modal"
+                    aria-label="Close"><i class="material-icons modal-close-icon">x</i></button>
+            <div class="modal-body">
+                <div class="row">
+                    <!--<form #productListForm="ngForm" novalidate-->
+                    <!--(ngSubmit)="save(productListForm.valid);" class="form-horizontal">-->
+
+                    <!--</form>-->
+
+                    <div *ngFor="let productList of productLists">
+                        <div>{{productList.Title}}</div>
+                        <input type="number" [id]="productList.Id" [value]="getProductAmount(productList)">
+                        <button class="btn btn-success" (click)="addToProductList(productList)">add</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
