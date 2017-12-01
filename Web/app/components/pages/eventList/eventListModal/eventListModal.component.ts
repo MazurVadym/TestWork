@@ -9,6 +9,7 @@ import { Customer } from "../../../../objects/customer/customer";
 import { ConfigService } from "../../../../services/configService";
 import { ProductList } from "../../../../objects/productList/productList";
 import { EventList } from "../../../../objects/eventList/eventList";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validator, ValidatorFn, Validators } from "@angular/forms";
 
 declare var $: any;
 
@@ -22,6 +23,8 @@ export class EventListModalComponent implements OnInit {
 
     public eventList: EventList = new EventList();
     public eventListOrigin: EventList = new EventList();
+    public eventListForm: FormGroup;
+    public isSend: boolean = false;
 
     @Output()
     public eventListChange: EventEmitter<EventList> = new EventEmitter<EventList>();
@@ -30,16 +33,41 @@ export class EventListModalComponent implements OnInit {
 
     @ViewChild("eventListModal") public productListModalModal: ModalDirective;
 
-    constructor(private eventListService: EventListService, private configService: ConfigService) {
+    constructor(private eventListService: EventListService, private configService: ConfigService, private fb: FormBuilder) {
     }
 
     public ngOnInit(): void {
+        this.buildForm();
         this.initSelect2();
 
         this.productListModalModal.onHidden.subscribe((x: any) => this.destroy());
     }
 
+    public buildForm(): void {
+        this.eventListForm = this.fb.group({
+            "title": ["", [
+                Validators.required,
+                this.hasInvalidSymbol
+            ]],
+            "description": ["", [
+                Validators.required,
+                this.hasInvalidSymbol
+            ]],
+            "customerSelect": ["", [
+                Validators.required
+            ]]
+        })
+    }
+
+    //just for view
+    public hasInvalidSymbol(control: AbstractControl) {
+        return /[#$*]+/.test(control.value) ? { "InvalidSymbol": true } : null;
+    }
+
     public destroy(): void {
+        this.eventListForm.reset();
+        this.isSend = false;
+
         $("#customerSelect").select2('destroy');
         $("#productListSelect").select2('destroy');
     }
@@ -99,6 +127,10 @@ export class EventListModalComponent implements OnInit {
                 return;
 
             self.eventList.OwnerId = selectedData[0].id;
+
+            let control = self.eventListForm.controls['customerSelect'];
+            control.markAsTouched();
+            control.setValue(selectedData[0].id);//todo another way validate
         });
 
         $("#customerSelect").val(this.eventList.OwnerId).change();
@@ -108,8 +140,8 @@ export class EventListModalComponent implements OnInit {
 
         let self = this;
 
-        let data: [] = new Array<any>();
-        let selectedId: [] = new Array<string>();
+        let data = new Array<any>();
+        let selectedId = new Array<string>();
 
         for (let productList of this.eventList.ProductList) {
             selectedId.push(productList.Id);
@@ -181,7 +213,6 @@ export class EventListModalComponent implements OnInit {
             }
         });
 
-
         $("#productListSelect").val(selectedId).change();
     }
 
@@ -212,6 +243,11 @@ export class EventListModalComponent implements OnInit {
     }
 
     public save(isValid: boolean): void {
+        this.isSend = true;
+
+        if (!isValid)
+            return;
+
         if (this.isCreated) {
             this.eventListService.create(this.eventList).then(x => {
                 this.eventListChange.emit(x.Data);

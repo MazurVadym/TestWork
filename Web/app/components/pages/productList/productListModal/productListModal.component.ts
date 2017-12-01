@@ -5,6 +5,7 @@ import { ProductListService } from "../../../../services/productListService";
 import { ConfigService } from "../../../../services/configService";
 import { BaseResponse } from "../../../../objects/common/baseResponse";
 import { Customer } from "../../../../objects/customer/customer";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 /**
  * Created by vadim.m on 11/17/2017.
  */
@@ -19,6 +20,9 @@ declare var $: any;
 
 export class ProductListModalComponent implements OnInit {
 
+    public productListForm: FormGroup;
+    public isSend: boolean = false;
+
     @Output()
     public productListChange: EventEmitter<ProductList> = new EventEmitter<ProductList>();
 
@@ -29,19 +33,32 @@ export class ProductListModalComponent implements OnInit {
 
     public isCreate: boolean = true;
 
-    constructor(private productListService: ProductListService, private configService: ConfigService) {
+    constructor(private productListService: ProductListService, private configService: ConfigService, private fb: FormBuilder) {
     }
 
     public ngOnInit(): void {
+        this.buildForm();
         this.initSelect2();
 
         this.productListModal.onHidden.subscribe((x: any) => this.destroy());
     }
 
     public destroy(): void {
-
+        this.productListForm.reset();
+        this.isSend=false;
 
         $("#customerSelect").select2('destroy');
+    }
+
+    public buildForm():void{
+        this.productListForm = this.fb.group({
+            "title": ["", [
+                Validators.required
+            ]],
+            "customerSelect":["",[
+                Validators.required
+            ]]
+        })
     }
 
     public initSelect2() {
@@ -99,6 +116,10 @@ export class ProductListModalComponent implements OnInit {
                 return;
 
             self.productList.OwnerId = selectedData[0].id;
+
+            let control = self.productListForm.controls['customerSelect'];
+            control.markAsTouched();
+            control.setValue(selectedData[0].id);//todo another way validate
         });
 
         $("#customerSelect").val(this.productList.OwnerId).change();
@@ -126,7 +147,11 @@ export class ProductListModalComponent implements OnInit {
     }
 
     public save(isValid: boolean): void {
-        if (this.isCreated) {
+        this.isSend=true;
+
+        if (!isValid) return;
+
+        if (this.isCreate) {
             this.productListService.create(this.productList).then(x => {
                 this.productListChange.emit(x.Data);
                 this.productListOrigin = x.Data;

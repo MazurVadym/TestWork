@@ -10,15 +10,25 @@
                     aria-label="Close"><i class="material-icons modal-close-icon">x</i></button>
             <div class="modal-body">
                 <div class="row">
-                    <form #eventListModal="ngForm" novalidate
-                          (ngSubmit)="save(eventListModal.valid);" class="form-horizontal">
-                        <input type="text" placeholder="Event List Title" name="Title" [(ngModel)]="eventList.Title">
-                        <input type="text" placeholder="Description" name="Description" [(ngModel)]="eventList.Description">
+                    <form novalidate [formGroup]="eventListForm"
+                          (ngSubmit)="save(eventListForm.valid);" class="form-horizontal">
+                        <input type="text" placeholder="Event List Title" formControlName="title" [(ngModel)]="eventList.Title">
+                        <div *ngIf="!eventListForm.controls['title'].valid && (eventListForm.controls['title'].touched || isSend)"></div>
+                        <div *ngIf="!eventListForm.controls['title'].valid && eventListForm.controls['title'].touched && eventListForm.controls['title'].hasError('InvalidSymbol')">
+                            Invalid symbols
+                        </div>
+
+                        <input type="text" placeholder="Description" formControlName="description" [(ngModel)]="eventList.Description">
+                        <div *ngIf="!eventListForm.controls['description'].valid && (eventListForm.controls['description'].touched || isSend)"> Description is required</div>
+                        <div *ngIf="!eventListForm.controls['description'].valid && eventListForm.controls['description'].touched && eventListForm.controls['description'].hasError('InvalidSymbol')">
+                            Invalid symbols
+                        </div>
 
                         <select id="customerSelect" class="form-control select2"
                                 required
-                                name="customerSelect">
+                                formControlName="customerSelect">
                         </select>
+                        <div *ngIf="!eventListForm.controls['customerSelect'].valid && (eventListForm.controls['customerSelect'].touched || isSend)">Customer is required</div>
 
                         <select id="productListSelect" class="form-control select2" multiple="multiple"
                                 required

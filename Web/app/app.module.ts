@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent }  from './app.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { appRoutes } from "./app.routes";
 import { ProductListComponent } from "./components/pages/productList/productList.component";
@@ -30,7 +30,7 @@ export function createConfigService(config: ConfigService) {
 }
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes), ModalModule.forRoot()],
+    imports: [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes), ModalModule.forRoot(), ReactiveFormsModule],
     declarations: [AppComponent, ProductListComponent, ProductListModalComponent, LayoutComponent, EventListComponent,EventListModalComponent, ProductComponent, ProductItemComponent, ProductModalComponent,
         ProductListItemComponent],
     bootstrap: [AppComponent],

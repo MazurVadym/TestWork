@@ -10,13 +10,16 @@
                     aria-label="Close"><i class="material-icons modal-close-icon">x</i></button>
             <div class="modal-body">
                 <div class="row">
-                    <form #productListForm="ngForm" novalidate
+                    <form novalidate [formGroup]="productListForm"
                           (ngSubmit)="save(productListForm.valid);" class="form-horizontal">
-                        <input type="text" placeholder="Product List Title" name="Title" [(ngModel)]="productList.Title">
+
+                        <input type="text" placeholder="Product List Title" formControlName="title" [(ngModel)]="productList.Title">
+                        <div *ngIf="!productListForm.controls['title'].valid && (productListForm.controls['title'].touched || isSend)">Title is required</div>
+
                         <select id="customerSelect" class="form-control select2"
-                                required
-                                name="customerSelect">
+                                formControlName="customerSelect">
                         </select>
+                        <div *ngIf="!productListForm.controls['customerSelect'].valid && (productListForm.controls['customerSelect'].touched || isSend)">Customer is required</div>
 
                         <button type="submit">save</button>
                     </form>
