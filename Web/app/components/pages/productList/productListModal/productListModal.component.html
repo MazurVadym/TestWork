@@ -14,12 +14,16 @@
                           (ngSubmit)="save(productListForm.valid);" class="form-horizontal">
 
                         <input type="text" placeholder="Product List Title" formControlName="title" [(ngModel)]="productList.Title">
-                        <div *ngIf="!productListForm.controls['title'].valid && (productListForm.controls['title'].touched || isSend)">Title is required</div>
+                        <ng-container *ngIf="productListForm.controls['title'].dirty">
+                            <div *ngIf="!productListForm.controls['title'].valid && productListForm.controls['title'].hasError('required')">Title is required</div>
+                        </ng-container>
 
                         <select id="customerSelect" class="form-control select2"
                                 formControlName="customerSelect">
                         </select>
-                        <div *ngIf="!productListForm.controls['customerSelect'].valid && (productListForm.controls['customerSelect'].touched || isSend)">Customer is required</div>
+                        <ng-container *ngIf="productListForm.controls['customerSelect'].dirty">
+                            <div *ngIf="!productListForm.controls['customerSelect'].valid && productListForm.controls['customerSelect'].hasError('required')">Customer is required</div>
+                        </ng-container>
 
                         <button type="submit">save</button>
                     </form>

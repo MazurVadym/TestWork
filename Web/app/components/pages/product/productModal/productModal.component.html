@@ -10,15 +10,9 @@
                     aria-label="Close"><i class="material-icons modal-close-icon">x</i></button>
             <div class="modal-body">
                 <div class="row">
-                    <!--<form #productListForm="ngForm" novalidate-->
-                    <!--(ngSubmit)="save(productListForm.valid);" class="form-horizontal">-->
-
-                    <!--</form>-->
 
                     <div *ngFor="let productList of productLists">
-                        <div>{{productList.Title}}</div>
-                        <input type="number" [id]="productList.Id" [value]="getProductAmount(productList)">
-                        <button class="btn btn-success" (click)="addToProductList(productList)">add</button>
+                        <product-item-create [variant]="variant" [product]="product" [productList]="productList"></product-item-create>
                     </div>
 
                 </div>

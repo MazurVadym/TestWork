@@ -1,0 +1,11 @@
+<form novalidate (ngSubmit)="addToProductList(productItemCreateForm.valid)" [formGroup]="productItemCreateForm">
+    <div>{{productList.Title}}</div>
+    <input type="text" formControlName="amount" [(ngModel)]="amount" [value]="getProductAmount()">
+    <ng-container *ngIf="productItemCreateForm.controls['amount'].dirty">
+        <div *ngIf="!productItemCreateForm.controls['amount'].valid && productItemCreateForm.controls['amount'].hasError('required')">Amount is required</div>
+        <div *ngIf="!productItemCreateForm.controls['amount'].valid && productItemCreateForm.controls['amount'].hasError('pattern')">
+            Only number
+        </div>
+    </ng-container>
+    <button class="btn btn-success" type="submit">add</button>
+</form>

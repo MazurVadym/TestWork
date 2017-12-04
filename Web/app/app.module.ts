@@ -24,6 +24,7 @@ import { ProductComponent } from "./components/pages/product/product.component";
 import { ProductItemComponent } from "./components/pages/product/productItem/productItem.component";
 import { ProductModalComponent } from "./components/pages/product/productModal/productModal.component";
 import { ProductListItemComponent } from "./components/pages/productList/productListItem/productListItem.component";
+import { ProductItemCreateComponent } from "./components/pages/product/productItem/productItemCreate/productItemCreate.component";
 
 export function createConfigService(config: ConfigService) {
     return () => config.load();
@@ -32,7 +33,7 @@ export function createConfigService(config: ConfigService) {
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(appRoutes), ModalModule.forRoot(), ReactiveFormsModule],
     declarations: [AppComponent, ProductListComponent, ProductListModalComponent, LayoutComponent, EventListComponent,EventListModalComponent, ProductComponent, ProductItemComponent, ProductModalComponent,
-        ProductListItemComponent],
+        ProductListItemComponent, ProductItemCreateComponent],
     bootstrap: [AppComponent],
     providers: [ConfigService, ProductListService, ProductItemService, EventListService, ProductListResolver, EventListResolver, ProductService,ProductResolver,
         {

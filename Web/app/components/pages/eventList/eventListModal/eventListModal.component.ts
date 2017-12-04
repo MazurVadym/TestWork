@@ -24,7 +24,6 @@ export class EventListModalComponent implements OnInit {
     public eventList: EventList = new EventList();
     public eventListOrigin: EventList = new EventList();
     public eventListForm: FormGroup;
-    public isSend: boolean = false;
 
     @Output()
     public eventListChange: EventEmitter<EventList> = new EventEmitter<EventList>();
@@ -66,7 +65,6 @@ export class EventListModalComponent implements OnInit {
 
     public destroy(): void {
         this.eventListForm.reset();
-        this.isSend = false;
 
         $("#customerSelect").select2('destroy');
         $("#productListSelect").select2('destroy');
@@ -243,8 +241,6 @@ export class EventListModalComponent implements OnInit {
     }
 
     public save(isValid: boolean): void {
-        this.isSend = true;
-
         if (!isValid)
             return;
 

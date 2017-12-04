@@ -6,7 +6,7 @@ export class ProductItem {
     public Id: string;
     public ProductListId: string;
     public ProductId: number;
-    public VariantID: number;
+    public VariantId: number;
     public Amount: number;
     public Product:Product;
 

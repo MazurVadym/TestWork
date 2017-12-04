@@ -13,22 +13,27 @@
                     <form novalidate [formGroup]="eventListForm"
                           (ngSubmit)="save(eventListForm.valid);" class="form-horizontal">
                         <input type="text" placeholder="Event List Title" formControlName="title" [(ngModel)]="eventList.Title">
-                        <div *ngIf="!eventListForm.controls['title'].valid && (eventListForm.controls['title'].touched || isSend)"></div>
-                        <div *ngIf="!eventListForm.controls['title'].valid && eventListForm.controls['title'].touched && eventListForm.controls['title'].hasError('InvalidSymbol')">
-                            Invalid symbols
-                        </div>
+                        <ng-container *ngIf="eventListForm.controls['title'].dirty">
+                            <div *ngIf="!eventListForm.controls['title'].valid && eventListForm.controls['title'].hasError('required')">Title is required</div>
+                            <div *ngIf="!eventListForm.controls['title'].valid && eventListForm.controls['title'].hasError('InvalidSymbol')">
+                                Invalid symbols
+                            </div>
+                        </ng-container>
 
                         <input type="text" placeholder="Description" formControlName="description" [(ngModel)]="eventList.Description">
-                        <div *ngIf="!eventListForm.controls['description'].valid && (eventListForm.controls['description'].touched || isSend)"> Description is required</div>
-                        <div *ngIf="!eventListForm.controls['description'].valid && eventListForm.controls['description'].touched && eventListForm.controls['description'].hasError('InvalidSymbol')">
-                            Invalid symbols
-                        </div>
-
+                        <ng-container *ngIf="eventListForm.controls['description'].dirty">
+                            <div *ngIf="!eventListForm.controls['description'].valid && eventListForm.controls['description'].hasError('required')"> Description is required</div>
+                            <div *ngIf="!eventListForm.controls['description'].valid && eventListForm.controls['description'].hasError('InvalidSymbol')">
+                                Invalid symbols
+                            </div>
+                        </ng-container>
                         <select id="customerSelect" class="form-control select2"
                                 required
                                 formControlName="customerSelect">
                         </select>
-                        <div *ngIf="!eventListForm.controls['customerSelect'].valid && (eventListForm.controls['customerSelect'].touched || isSend)">Customer is required</div>
+                        <ng-container *ngIf="eventListForm.controls['customerSelect'].dirty">
+                            <div *ngIf="!eventListForm.controls['customerSelect'].valid && eventListForm.controls['customerSelect'].hasError('required')">Customer is required</div>
+                        </ng-container>
 
                         <select id="productListSelect" class="form-control select2" multiple="multiple"
                                 required

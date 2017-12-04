@@ -45,17 +45,16 @@ export class ProductListModalComponent implements OnInit {
 
     public destroy(): void {
         this.productListForm.reset();
-        this.isSend=false;
 
         $("#customerSelect").select2('destroy');
     }
 
-    public buildForm():void{
+    public buildForm(): void {
         this.productListForm = this.fb.group({
             "title": ["", [
                 Validators.required
             ]],
-            "customerSelect":["",[
+            "customerSelect": ["", [
                 Validators.required
             ]]
         })
@@ -147,7 +146,6 @@ export class ProductListModalComponent implements OnInit {
     }
 
     public save(isValid: boolean): void {
-        this.isSend=true;
 
         if (!isValid) return;
 
