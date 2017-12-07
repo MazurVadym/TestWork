@@ -2,7 +2,7 @@ import { BaseApi } from "./baseApi";
 import { Http, RequestOptions } from "@angular/http";
 import { ConfigService } from "./configService";
 import { BaseResponse } from "../objects/common/baseResponse";
-import { ProductItem } from "../objects/productList/productItem";
+import { ProductItem } from "../objects/product/productItem";
 import { Injectable } from "@angular/core";
 /**
  * Created by vadim.m on 11/17/2017.

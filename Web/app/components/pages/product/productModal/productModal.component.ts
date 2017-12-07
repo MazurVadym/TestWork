@@ -4,7 +4,7 @@
 import { Component, Input, ViewChild } from "@angular/core";
 import { ModalDirective } from "ngx-bootstrap";
 import { Product } from "../../../../objects/product/product";
-import { ProductList } from "../../../../objects/productList/productList";
+import { ProductList } from "../../../../objects/list/productList/productList";
 import { Variant } from "../../../../objects/product/variant";
 
 @Component({

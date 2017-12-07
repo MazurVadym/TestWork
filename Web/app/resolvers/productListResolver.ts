@@ -1,4 +1,4 @@
-import { ProductList } from "../objects/productList/productList";
+import { ProductList } from "../objects/list/productList/productList";
 import { ActivatedRouteSnapshot } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { ProductListService } from "../services/productListService";

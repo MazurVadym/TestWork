@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BaseApi } from "./baseApi";
 import { Http, RequestOptions } from "@angular/http";
 import { ConfigService } from "./configService";
-import { EventList } from "../objects/eventList/eventList";
+import { EventList } from "../objects/list/eventList/eventList";
 import { BaseResponse } from "../objects/common/baseResponse";
 /**
  * Created by vadim.m on 11/17/2017.

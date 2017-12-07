@@ -3,7 +3,7 @@
  */
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ProductListService } from "../../../services/productListService";
-import { ProductList } from "../../../objects/productList/productList";
+import { ProductList } from "../../../objects/list/productList/productList";
 import { ActivatedRoute } from "@angular/router";
 import { ProductListModalComponent } from "./ProductListModal/productListModal.component";
 

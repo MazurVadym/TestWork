@@ -2,11 +2,11 @@
  * Created by vadim.m on 12/4/2017.
  */
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { ProductList } from "../../../../../objects/productList/productList";
+import { ProductList } from "../../../../../objects/list/productList/productList";
 import { Product } from "../../../../../objects/product/product";
 import { Variant } from "../../../../../objects/product/variant";
 import { ProductItemService } from "../../../../../services/productItemService";
-import { ProductItem } from "../../../../../objects/productList/productItem";
+import { ProductItem } from "../../../../../objects/product/productItem";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { StringHelper } from "../../../../../helpers/StringHelper";
 

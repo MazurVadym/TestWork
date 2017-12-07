@@ -1,4 +1,4 @@
-import { Product } from "../product/product";
+import { Product } from "./product";
 /**
  * Created by vadim.m on 11/16/2017.
  */

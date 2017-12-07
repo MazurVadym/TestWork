@@ -1,6 +1,6 @@
 import { ModalDirective } from "ngx-bootstrap";
 import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
-import { ProductList } from "../../../../objects/productList/productList";
+import { ProductList } from "../../../../objects/list/productList/productList";
 import { ProductListService } from "../../../../services/productListService";
 import { ConfigService } from "../../../../services/configService";
 import { BaseResponse } from "../../../../objects/common/baseResponse";

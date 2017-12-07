@@ -5,7 +5,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/cor
 import { Product } from "../../../../objects/product/product";
 import { Variant } from "../../../../objects/product/variant";
 import { ProductModalComponent } from "../productModal/productModal.component";
-import { ProductList } from "../../../../objects/productList/productList";
+import { ProductList } from "../../../../objects/list/productList/productList";
 
 declare var $: any;
 

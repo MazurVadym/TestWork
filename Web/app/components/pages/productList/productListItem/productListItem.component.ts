@@ -2,7 +2,7 @@
  * Created by vadim.m on 11/19/2017.
  */
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { ProductItem } from "../../../../objects/productList/productItem";
+import { ProductItem } from "../../../../objects/product/productItem";
 import { Variant } from "../../../../objects/product/variant";
 
 @Component({

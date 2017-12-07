@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { ConfigService } from "./configService";
 import { Http, RequestOptions } from "@angular/http";
 import { BaseResponse } from "../objects/common/baseResponse";
-import { ProductList } from "../objects/productList/productList";
+import { ProductList } from "../objects/list/productList/productList";
 /**
  * Created by vadim.m on 11/16/2017.
  */

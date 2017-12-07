@@ -5,7 +5,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../../../objects/product/product";
 import { ActivatedRoute } from "@angular/router";
-import { ProductList } from "../../../objects/productList/productList";
+import { ProductList } from "../../../objects/list/productList/productList";
 
 
 @Component({

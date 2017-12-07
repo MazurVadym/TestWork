@@ -7,8 +7,8 @@ import { EventListService } from "../../../../services/eventListService";
 import { BaseResponse } from "../../../../objects/common/baseResponse";
 import { Customer } from "../../../../objects/customer/customer";
 import { ConfigService } from "../../../../services/configService";
-import { ProductList } from "../../../../objects/productList/productList";
-import { EventList } from "../../../../objects/eventList/eventList";
+import { ProductList } from "../../../../objects/list/productList/productList";
+import { EventList } from "../../../../objects/list/eventList/eventList";
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 declare var $: any;

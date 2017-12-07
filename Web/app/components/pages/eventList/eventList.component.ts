@@ -3,7 +3,7 @@
  */
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { EventListService } from "../../../services/eventListService";
-import { EventList } from "../../../objects/eventList/eventList";
+import { EventList } from "../../../objects/list/eventList/eventList";
 import { ActivatedRoute } from "@angular/router";
 import { EventListModalComponent } from "./eventListModal/eventListModal.component";
 
