@@ -9,7 +9,7 @@ import { Customer } from "../../../../objects/customer/customer";
 import { ConfigService } from "../../../../services/configService";
 import { ProductList } from "../../../../objects/productList/productList";
 import { EventList } from "../../../../objects/eventList/eventList";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validator, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 declare var $: any;
 
@@ -70,7 +70,7 @@ export class EventListModalComponent implements OnInit {
         $("#productListSelect").select2('destroy');
     }
 
-    public customerSelect() {
+    public customerSelect(): void {
         let self = this;
 
         let data = [
@@ -134,7 +134,7 @@ export class EventListModalComponent implements OnInit {
         $("#customerSelect").val(this.eventList.OwnerId).change();
     }
 
-    public productListSelect() {
+    public productListSelect(): void {
 
         let self = this;
 
@@ -214,7 +214,7 @@ export class EventListModalComponent implements OnInit {
         $("#productListSelect").val(selectedId).change();
     }
 
-    public initSelect2() {
+    public initSelect2(): void {
         this.customerSelect();
         this.productListSelect();
     }
@@ -223,15 +223,14 @@ export class EventListModalComponent implements OnInit {
         this.productListModalModal.hide();
     }
 
-    public show(eventList: EventList, isCreated: boolean) {
+    public show(eventList: EventList, isCreated: boolean = false): void {
         if (eventList) {
             this.eventListOrigin = eventList;
         }
         else
             this.eventListOrigin = new EventList();
 
-        if (isCreated)
-            this.isCreated = isCreated;
+        this.isCreated = isCreated;
 
         this.eventList = JSON.parse(JSON.stringify(this.eventListOrigin));
 
@@ -244,19 +243,21 @@ export class EventListModalComponent implements OnInit {
         if (!isValid)
             return;
 
-        if (this.isCreated) {
-            this.eventListService.create(this.eventList).then(x => {
-                this.eventListChange.emit(x.Data);
-                this.eventListOrigin = x.Data;
-                this.hide();
+        if (this.isCreated) {//for rest
+            this.eventListService.create(this.eventList).then(resp => {
+                this.processModifyResponse(resp);
             });
         }
         else {
-            this.eventListService.update(this.eventList).then(x => {
-                this.eventListChange.emit(x.Data);
-                this.eventListOrigin = x.Data;
-                this.hide();
+            this.eventListService.update(this.eventList).then(resp => {
+                this.processModifyResponse(resp);
             });
         }
+    }
+
+    public processModifyResponse(resp: BaseResponse<EventList>): void {
+        this.eventListChange.emit(resp.Data);
+        this.eventListOrigin = resp.Data;
+        this.hide();
     }
 }

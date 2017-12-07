@@ -5,8 +5,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../../../objects/product/product";
 import { ActivatedRoute } from "@angular/router";
-import { ProductService } from "../../../services/productService";
-import { ProductListService } from "../../../services/productListService";
 import { ProductList } from "../../../objects/productList/productList";
 
 
@@ -20,7 +18,7 @@ export class ProductComponent implements OnInit{
     public products: Product[];
     public productLists:ProductList[];
 
-    constructor(private route: ActivatedRoute, private productService: ProductService) {
+    constructor(private route: ActivatedRoute) {
 
     }
 

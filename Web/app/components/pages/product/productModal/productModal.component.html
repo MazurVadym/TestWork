@@ -11,10 +11,11 @@
             <div class="modal-body">
                 <div class="row">
 
-                    <div *ngFor="let productList of productLists">
-                        <product-item-create [variant]="variant" [product]="product" [productList]="productList"></product-item-create>
-                    </div>
-
+                    <ng-container *ngIf="variant && product">
+                        <div *ngFor="let productList of productLists">
+                            <product-item-create [variant]="variant" [product]="product" [productList]="productList"></product-item-create>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>

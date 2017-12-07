@@ -1,2 +1,4 @@
-<div>{{productFullName}}</div>
-<img [src]="imgUrl" style="max-width: 40px;max-height: 40px;">
+<div>{{productItem.Product.Title}} {{currentVariant.Title}}</div>
+<img [src]="currentVariant.ImgUrl[0]" style="max-width: 40px;max-height: 40px;">
+<div>Amount</div>
+<div>{{productItem.Amount}}</div>

@@ -1,8 +1,9 @@
 /**
  * Created by vadim.m on 11/19/2017.
  */
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { ProductItem } from "../../../../objects/productList/productItem";
+import { Variant } from "../../../../objects/product/variant";
 
 @Component({
     selector: 'product-list-item',
@@ -10,26 +11,27 @@ import { ProductItem } from "../../../../objects/productList/productItem";
     moduleId: module.id.toString()
 })
 
-export class ProductListItemComponent implements OnInit {
+export class ProductListItemComponent implements OnChanges {
+
     @Input()
     public productItem: ProductItem;
 
-    public productFullName: string;
-    public imgUrl: string;
+    public currentVariant: Variant;
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        this.setCurrentVariant();
+    }
 
-    public ngOnInit(): void {
-
-        if(!this.productItem.Product)
+    public setCurrentVariant(): void {
+        if (!this.productItem.Product)
             return;
 
         let currentVariant = this.productItem.Product.Variants.find(x => x.Id == this.productItem.VariantId);
 
-        if(!currentVariant)
-        return;
+        if (!currentVariant)
+            return;
 
-        this.productFullName=`${this.productItem.Product.Title} ${currentVariant.Title}`;
-        this.imgUrl=currentVariant.ImgUrl;
+        this.currentVariant = currentVariant;
     }
 
 }

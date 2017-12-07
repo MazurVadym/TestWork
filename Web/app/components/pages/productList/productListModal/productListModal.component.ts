@@ -21,7 +21,6 @@ declare var $: any;
 export class ProductListModalComponent implements OnInit {
 
     public productListForm: FormGroup;
-    public isSend: boolean = false;
 
     @Output()
     public productListChange: EventEmitter<ProductList> = new EventEmitter<ProductList>();
@@ -60,7 +59,7 @@ export class ProductListModalComponent implements OnInit {
         })
     }
 
-    public initSelect2() {
+    public initSelect2(): void {
         let self = this;
 
         let data = [
@@ -129,14 +128,13 @@ export class ProductListModalComponent implements OnInit {
         this.productListModal.hide();
     }
 
-    public show(productList: ProductList, isCreated: boolean) {
+    public show(productList: ProductList, isCreated: boolean = false) {
         if (productList)
             this.productListOrigin = productList;
         else
             this.productListOrigin = new ProductList();
 
-        if (isCreated)
-            this.isCreate = isCreated;
+        this.isCreate = isCreated;
 
         this.productList = JSON.parse(JSON.stringify(this.productListOrigin));
 
@@ -146,22 +144,23 @@ export class ProductListModalComponent implements OnInit {
     }
 
     public save(isValid: boolean): void {
-
         if (!isValid) return;
 
-        if (this.isCreate) {
-            this.productListService.create(this.productList).then(x => {
-                this.productListChange.emit(x.Data);
-                this.productListOrigin = x.Data;
-                this.hide();
+        if (this.isCreate) {//for rest
+            this.productListService.create(this.productList).then(resp => {
+                this.processModifyResponse(resp);
             });
         }
         else {
-            this.productListService.update(this.productList).then(x => {
-                this.productListChange.emit(x.Data);
-                this.productListOrigin = x.Data;
-                this.hide();
+            this.productListService.update(this.productList).then(resp => {
+                this.processModifyResponse(resp);
             });
         }
+    }
+
+    public processModifyResponse(resp: BaseResponse<ProductList>): void {
+        this.productListChange.emit(resp.Data);
+        this.productListOrigin = resp.Data;
+        this.hide();
     }
 }

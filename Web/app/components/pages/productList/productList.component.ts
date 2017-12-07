@@ -4,8 +4,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ProductListService } from "../../../services/productListService";
 import { ProductList } from "../../../objects/productList/productList";
-import { ProductItem } from "../../../objects/productList/productItem";
-import { ProductItemService } from "../../../services/productItemService";
 import { ActivatedRoute } from "@angular/router";
 import { ProductListModalComponent } from "./ProductListModal/productListModal.component";
 
@@ -21,7 +19,7 @@ export class ProductListComponent implements OnInit {
 
     public productLists: ProductList[];
 
-    constructor(private route: ActivatedRoute, private productListService: ProductListService, private productItemService: ProductItemService) {
+    constructor(private route: ActivatedRoute, private productListService: ProductListService) {
 
     }
 
@@ -30,8 +28,8 @@ export class ProductListComponent implements OnInit {
     }
 
     public delete(productList: ProductList): void {
-        this.productListService.deleteProductList(productList.Id).then(x => {
-            this.productLists.splice(this.productLists.indexOf(productList), 1);
+        this.productListService.deleteProductList(productList.Id).then(() => {
+            this.productLists.splice(this.productLists.indexOf(productList), 1);//todo check resp
         });
     }
 

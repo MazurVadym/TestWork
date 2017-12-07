@@ -10,7 +10,7 @@
                 <button (click)="modal.show(productList,false)">edit</button>
                 <button (click)="delete(productList)">delete</button>
                 <div *ngFor="let productItem of productList.ProductItem">
-                    <product-list-item [productItem]="productItem"></product-list-item>
+                    <product-list-item *ngIf="productItem" [productItem]="productItem"></product-list-item>
 
                 </div>
             </li>

@@ -27,10 +27,6 @@ export class ProductItemComponent implements OnInit, AfterViewInit {
 
     public selectedVariant: Variant;
 
-    constructor() {
-    }
-
-
     public ngOnInit(): void {
         this.selectedVariant = this.product.Variants[0];
     }
