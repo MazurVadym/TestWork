@@ -1,7 +1,7 @@
 /**
  * Created by vadim.m on 12/4/2017.
  */
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from "@angular/core";
 import { ProductList } from "../../../../../objects/list/productList/productList";
 import { Product } from "../../../../../objects/product/product";
 import { Variant } from "../../../../../objects/product/variant";
@@ -9,6 +9,7 @@ import { ProductItemService } from "../../../../../services/productItemService";
 import { ProductItem } from "../../../../../objects/product/productItem";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { StringHelper } from "../../../../../helpers/StringHelper";
+import { BaseResponse } from "../../../../../objects/common/baseResponse";
 
 @Component({
     selector: 'product-item-create',
@@ -16,12 +17,15 @@ import { StringHelper } from "../../../../../helpers/StringHelper";
     moduleId: module.id.toString()
 })
 
-export class ProductItemCreateComponent implements OnInit, OnChanges{
+export class ProductItemCreateComponent implements OnInit, OnChanges {
 
     @Input() public productList: ProductList;
 
+    public productListOrigin: ProductList;
+
     @Input() public product: Product;
     @Input() public variant: Variant;
+    @Input() public isShown: boolean;
 
     public productItemCreateForm: FormGroup;
 
@@ -35,11 +39,30 @@ export class ProductItemCreateComponent implements OnInit, OnChanges{
         this.buildForm();
     }
 
-    public ngOnChanges() :void{
-        this.setCurrentProductItem()
+    public ngOnChanges(changes: { [propName: string]: SimpleChange }): void {
+        this.setCurrentProductItem();
+
+        if (changes['isShown'] == undefined)//todo
+            return;
+
+        if (changes['isShown'].currentValue) {
+            this.cloneProductList();
+        }
+        else {
+            this.restoreProductList();
+        }
+
     }
 
-    public buildForm():void {
+    public cloneProductList(): void {
+        this.productListOrigin = JSON.parse(JSON.stringify(this.productList));
+    }
+
+    public restoreProductList(): void {
+        this.productList = this.productListOrigin;
+    }
+
+    public buildForm(): void {
         this.productItemCreateForm = this.fb.group({
             "amount": ["", [
                 Validators.required,
@@ -62,9 +85,17 @@ export class ProductItemCreateComponent implements OnInit, OnChanges{
     public addToProductList(isValid: boolean): void {
         if (!isValid) return;
 
-        if(StringHelper.isNullOrEmpty(this.productItem.Id))//for rest
-            this.productItemService.create(this.productItem);
+        if (StringHelper.isNullOrEmpty(this.productItem.Id))//for rest
+            this.productItemService.create(this.productItem).then(resp => {
+                this.processModifyResponse(resp);
+            });
         else
-            this.productItemService.update(this.productItem);
+            this.productItemService.update(this.productItem).then(resp => {
+                this.processModifyResponse(resp);
+            });
+    }
+
+    public processModifyResponse(resp: BaseResponse<ProductItem>) {//todo
+        this.productListOrigin = JSON.parse(JSON.stringify(this.productList));
     }
 }

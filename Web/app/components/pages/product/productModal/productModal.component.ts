@@ -17,7 +17,6 @@ export class ProductModalComponent {
 
     @ViewChild("productModal") public productModal: ModalDirective;
 
-    @Input()
     public productLists: ProductList[];
 
     public product: Product;
@@ -31,9 +30,10 @@ export class ProductModalComponent {
         this.productModal.hide();
     }
 
-    public show(product: Product, variant: Variant): void {
+    public show(product: Product, variant: Variant, productLists: ProductList[]): void {
         this.product = product;
         this.variant = variant;
+        this.productLists = productLists;
 
         this.productModal.show();
     }

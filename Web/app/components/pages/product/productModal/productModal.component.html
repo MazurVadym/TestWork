@@ -13,7 +13,7 @@
 
                     <ng-container *ngIf="variant && product">
                         <div *ngFor="let productList of productLists">
-                            <product-item-create [variant]="variant" [product]="product" [productList]="productList"></product-item-create>
+                            <product-item-create [variant]="variant" [product]="product" [productList]="productList" [isShown]="productModal.isShown"></product-item-create>
                         </div>
                     </ng-container>
                 </div>

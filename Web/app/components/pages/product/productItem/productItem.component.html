@@ -5,8 +5,7 @@
         <h4 class="card-title">{{selectedVariant.Title}}</h4>
         <select id={{product.Id}} class="form-control select2" required name="variantSelect">
         </select>
-        <button (click)="modal.show(product,selectedVariant)" class="btn btn-primary">add to product list</button>
+        <button (click)="modal.show(product,selectedVariant,productLists)" class="btn btn-primary">add to product list</button>
     </div>
 
-    <product-modal #productModal [productLists]="productLists"></product-modal>
 </div>

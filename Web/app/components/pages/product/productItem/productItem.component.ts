@@ -21,9 +21,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit {
     public product: Product;
 
     @Input()
-    public productLists:ProductList[];
+    public productLists: ProductList[];
 
-    @ViewChild('productModal') public modal: ProductModalComponent;
+    @Input()
+    public modal: ProductModalComponent;
 
     public selectedVariant: Variant;
 

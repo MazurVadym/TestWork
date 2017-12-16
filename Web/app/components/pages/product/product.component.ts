@@ -2,10 +2,11 @@
  * Created by vadim.m on 11/18/2017.
  */
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Product } from "../../../objects/product/product";
 import { ActivatedRoute } from "@angular/router";
 import { ProductList } from "../../../objects/list/productList/productList";
+import { ProductModalComponent } from "./productModal/productModal.component";
 
 
 @Component({
@@ -17,6 +18,8 @@ import { ProductList } from "../../../objects/list/productList/productList";
 export class ProductComponent implements OnInit{
     public products: Product[];
     public productLists:ProductList[];
+
+    @ViewChild('productModal') public modal: ProductModalComponent;
 
     constructor(private route: ActivatedRoute) {
 
